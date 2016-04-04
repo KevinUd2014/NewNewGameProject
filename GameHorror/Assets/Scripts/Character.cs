@@ -62,7 +62,7 @@ public class Character : MonoBehaviour {
 
         // speed = transform.rotation * speed;
 
-        // cC.SimpleMove(speed);//apply speed to the characterController
+        // cC.SimpleMove(speed);//apply speed to the characterController takes care of gravity for you!
 
     }
 }
