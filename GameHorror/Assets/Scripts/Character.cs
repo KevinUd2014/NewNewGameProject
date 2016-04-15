@@ -1,26 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof(CharacterController))]// make it so that we need a Character controller in our game in order for it to run!
 public class Character : MonoBehaviour {
 
     public float movementSpeed = 5.00f;
     public float mouseSensitivity = 5.00f;
     float verticalRotation = 0f; //will help with the vertical rotation of the camera  
     public float upDownRate = 60.0f;//sets the rate that the camera will max go to best is 80.  
-    public float jumpSpeed = 8.0f;
+    public float jumpSpeed = 5.0f;
     public float gravity = 20.0f;
     private Vector3 moveDirection = Vector3.zero;
+
+    CharacterController cC;
+
+    float verticalVelocity = 0;
 
     // Use this for initialization  
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;//This hiddes the mouse pointer
+        //Cursor.lockState = CursorLockMode.Locked;//This hiddes the mouse pointer
+        cC = GetComponent<CharacterController>(); //create a new CharacterController
     }
 
     // Update is called once per frame
     void Update()
     {
-
         //rotation
         float rotationSide = Input.GetAxis("Mouse X") * mouseSensitivity;
         //float rotationUpDown = Input.GetAxis("Mouse Y") * mouseSensitivity; //you can't do it Like this, charactercontrollers don't pitch up and down! 
@@ -37,13 +42,31 @@ public class Character : MonoBehaviour {
         Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
 
         //movement
-        CharacterController cC = GetComponent<CharacterController>(); //create a new CharacterController
 
-        if (cC.isGrounded)
+        //test-----------------------------------------------------------
+        float forwardMoveSpeed = Input.GetAxis("Vertical") * movementSpeed;
+        float SideMoveSpeed = Input.GetAxis("Horizontal") * movementSpeed;
+
+        verticalVelocity += Physics.gravity.y * Time.deltaTime;
+
+        if(cC.isGrounded && Input.GetButtonDown("Jump") ){
+
+            verticalVelocity = jumpSpeed;
+        }
+        if (Input.GetKey(KeyCode.LeftShift)) //this checks to see if the player is holding left shif
         {
-            //float forwardMoveSpeed = Input.GetAxis("Vertical") * movementSpeed;
-            //float SideMoveSpeed = Input.GetAxis("Horizontal") * movementSpeed;
-            //Vector3 speed = new Vector3(SideMoveSpeed, 0, forwardMoveSpeed); //puts both speeds in the speed variable
+            forwardMoveSpeed = Input.GetAxis("Vertical") * movementSpeed + 2.0f; //this increases our speed by the multiplier
+        }
+
+        Vector3 speed = new Vector3(SideMoveSpeed, verticalVelocity, forwardMoveSpeed); //puts both speeds in the speed variable
+
+        speed = transform.rotation * speed;
+
+        cC.Move(speed * Time.deltaTime);
+        //---------------------------------------------------------------
+        /*if (cC.isGrounded)
+        {
+            
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= movementSpeed;
@@ -52,9 +75,7 @@ public class Character : MonoBehaviour {
 
         }
         moveDirection.y -= gravity * Time.deltaTime;
-        cC.Move(moveDirection * Time.deltaTime);
-        // if (Input.GetButton("Jump"))
-        // {
+        cC.Move(moveDirection * Time.deltaTime);*/
 
         //transform.position += transform.up, jumpSpeed, Time.deltaTime;
         //transform.Translate(speed * Time.deltaTime, Space.World);
