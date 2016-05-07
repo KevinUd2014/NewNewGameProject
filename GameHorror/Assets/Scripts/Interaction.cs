@@ -45,6 +45,10 @@ public class Interaction : MonoBehaviour {
                     {
                         hitInformer.collider.GetComponent<Door>().ChangeDoorState();
                     }
+                    else if (hitInformer.collider.CompareTag("Key"))
+                    {
+                        hitInformer.collider.GetComponent<Key>().UnlockDoor();
+                    }
                 }
             }
         }

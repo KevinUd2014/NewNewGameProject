@@ -16,6 +16,8 @@ public class Door : MonoBehaviour {
     private AudioSource audioSource;
     public AudioClip opneningSound;
 
+    public bool isLocked = false;
+
     public bool front = false;
     public bool back = false;
 
@@ -26,11 +28,14 @@ public class Door : MonoBehaviour {
 
     public void ChangeDoorState()
     {
-        openDoor = !openDoor; // will be called for changing the door state!
-
-        if (audioSource != null)
+        if (isLocked != true)
         {
-            audioSource.PlayOneShot(opneningSound);
+            openDoor = !openDoor; // will be called for changing the door state!
+
+            if (audioSource != null)
+            {
+                audioSource.PlayOneShot(opneningSound);
+            }
         }
     }
 	// Update is called once per frame
