@@ -49,6 +49,11 @@ public class Interaction : MonoBehaviour {
                     {
                         hitInformer.collider.GetComponent<Key>().UnlockDoor();
                     }
+                    else if (hitInformer.collider.CompareTag("safedoor"))
+                    {
+                        //shows the UI for the safe
+                        hitInformer.collider.GetComponent<safeDoor>().ShowSafeCanvas();
+                    }
                 }
             }
         }

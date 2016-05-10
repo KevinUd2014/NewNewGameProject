@@ -26,7 +26,7 @@ public class Character : MonoBehaviour {
     // Use this for initialization  
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;//This hiddes the mouse pointer
+        Cursor.lockState = CursorLockMode.Locked;//This hiddes the mouse pointer
         //footstep = GetComponent<AudioSource>();
         cC = GetComponent<CharacterController>(); //create a new CharacterController
     }
