@@ -53,8 +53,10 @@
      <Compile Include="Assets\Scripts\FlashLight.cs" />
      <Compile Include="Assets\Scripts\Interaction.cs" />
      <Compile Include="Assets\Scripts\Key.cs" />
+     <Compile Include="Assets\Scripts\KnockOnDoor.cs" />
      <Compile Include="Assets\Scripts\Note.cs" />
      <Compile Include="Assets\Scripts\ScarePianoTrigger.cs" />
+     <Compile Include="Assets\Scripts\ScaryOpenDoor.cs" />
      <Compile Include="Assets\Scripts\ScreamTrigger.cs" />
      <Compile Include="Assets\Scripts\safeDoor.cs" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />

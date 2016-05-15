@@ -50,30 +50,13 @@ public class Door : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-
-        //if (openDoor)
-        //{
+        
         if (openDoor)//openDoor)
         {//opens the door //advanced!
             Quaternion targetRotationOpen = Quaternion.Euler(0, doorOpenAngle, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotationOpen, smooth * Time.deltaTime);
-
-            //if (transform.localRotation == targetRotationOpen)
-            //{
-            //    openCompletly = true;
-            //}
+            
         }
-            //else if (back && openCompletly == false)
-            //{
-            //    Quaternion targetRotationOpen = Quaternion.Euler(0, -doorOpenAngle, 0);
-            //    transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotationOpen, smooth * Time.deltaTime);
-
-            //    if (transform.localRotation == targetRotationOpen)
-            //    {
-            //        openCompletly = true;
-            //    }
-            //}
-        //}
         else
         {
             Quaternion targetRotationClosed = Quaternion.Euler(0, doorClosedAngle, 0);

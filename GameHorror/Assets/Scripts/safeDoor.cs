@@ -8,6 +8,10 @@ public class safeDoor : MonoBehaviour
     public GameObject playerObject;
     public GameObject playerHeadBobing;
 
+    //public int rightNumber;
+    public Image noteImage;
+    public GameObject HideButton;
+
     private int number01;
     private int number02;
     private int number03;
@@ -27,14 +31,30 @@ public class safeDoor : MonoBehaviour
     {
         opened = false;
         safeUI.enabled = false;
+        noteImage.enabled = false;
+        HideButton.SetActive(false);// button not available
     }
 
     public void ShowSafeCanvas()
     {
         safeUI.enabled = true;
+        ShowNoteImage();
         //disables the player = no movement
         LockCharacter();
 
+    }
+
+    public void ShowNoteImage()
+    {
+        noteImage.enabled = true;
+        HideButton.SetActive(true);// button available
+    }
+    public void HideNoteImage()
+    {
+        noteImage.enabled = false;
+        HideButton.SetActive(false);// button not available
+        safeUI.enabled = false;
+        UnlockCharacter();
     }
     // Update is called once per frame
     void Update()
@@ -42,6 +62,8 @@ public class safeDoor : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {
             UnlockCharacter();
+            noteImage.enabled = false;
+            HideButton.SetActive(false);// button not available
         }
         //checks for right combination
         if (number01 == 1 && number02 == 2 && number03 == 4 && number04 == 10)
@@ -51,6 +73,7 @@ public class safeDoor : MonoBehaviour
         if(opened == true)
         {
             UnlockCharacter();
+            noteImage.enabled = false;
 
             gameObject.layer = 0; // layer 0 is Default
 
