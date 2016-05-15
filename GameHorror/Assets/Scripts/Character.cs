@@ -36,22 +36,16 @@ public class Character : MonoBehaviour {
     {
         //rotation
         float rotationSide = Input.GetAxis("Mouse X") * mouseSensitivity;
-        //float rotationUpDown = Input.GetAxis("Mouse Y") * mouseSensitivity; //you can't do it Like this, charactercontrollers don't pitch up and down! 
         transform.Rotate(0, rotationSide, 0);
 
         verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-
-        //float currentUpDown = Camera.main.transform.rotation.eulerAngles.x;
-        //float desiredUpDown = currentUpDown - rotationUpDown;
-
-        //Debug.Log(desiredUpDown);
+        
         verticalRotation = Mathf.Clamp(verticalRotation, -upDownRate, upDownRate);
 
         Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
 
         //movement
-
-        //test-----------------------------------------------------------
+        
         float forwardMoveSpeed = Input.GetAxis("Vertical") * movementSpeed;
         float SideMoveSpeed = Input.GetAxis("Horizontal") * movementSpeed;
 
@@ -87,27 +81,6 @@ public class Character : MonoBehaviour {
         speed = transform.rotation * speed;
 
         cC.Move(speed * Time.deltaTime);
-        //---------------------------------------------------------------
-        /*if (cC.isGrounded)
-        {
-            
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= movementSpeed;
-            if (Input.GetButton("Jump"))
-                moveDirection.y = jumpSpeed;
-
-        }
-        moveDirection.y -= gravity * Time.deltaTime;
-        cC.Move(moveDirection * Time.deltaTime);*/
-
-        //transform.position += transform.up, jumpSpeed, Time.deltaTime;
-        //transform.Translate(speed * Time.deltaTime, Space.World);
-        // }
-
-        // speed = transform.rotation * speed;
-
-        // cC.SimpleMove(speed);//apply speed to the characterController takes care of gravity for you!
-
+       
     }
 }

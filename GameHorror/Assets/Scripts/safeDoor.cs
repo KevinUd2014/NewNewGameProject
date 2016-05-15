@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class safeDoor : MonoBehaviour
 {
-
     public Canvas safeUI;
     public GameObject playerObject;
     public GameObject playerHeadBobing;
@@ -19,9 +18,14 @@ public class safeDoor : MonoBehaviour
     public Text textNumber03;
     public Text textNumber04;
 
+    public bool opened;
+    public float doorOpenAngle = 90f;
+    public float smooth = 2f;
+
     // Use this for initialization
     void Start()
     {
+        opened = false;
         safeUI.enabled = false;
     }
 
@@ -29,25 +33,56 @@ public class safeDoor : MonoBehaviour
     {
         safeUI.enabled = true;
         //disables the player = no movement
-        playerObject.GetComponent<Character>().enabled = false;
-        playerHeadBobing.GetComponent<BobbingHead>().enabled = false;
+        LockCharacter();
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            UnlockCharacter();
+        }
+        //checks for right combination
+        if (number01 == 1 && number02 == 2 && number03 == 4 && number04 == 10)
+        {
+            opened = true;
+        }
+        if(opened == true)
+        {
+            UnlockCharacter();
 
-            playerObject.GetComponent<Character>().enabled = true;
-            playerHeadBobing.GetComponent<BobbingHead>().enabled = true;
-            safeUI.enabled = false;
+            gameObject.layer = 0; // layer 0 is Default
+
+            UnlockSafeDoor();
         }
     }
+
+    public void LockCharacter()
+    {
+        playerObject.GetComponent<Character>().enabled = false;
+        playerHeadBobing.GetComponent<BobbingHead>().enabled = false;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void UnlockCharacter()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        playerObject.GetComponent<Character>().enabled = true;
+        playerHeadBobing.GetComponent<BobbingHead>().enabled = true;
+        safeUI.enabled = false;
+    }
+
+    void UnlockSafeDoor()
+    {
+        Quaternion targetRotationOpen = Quaternion.Euler(0, 0, doorOpenAngle);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotationOpen, smooth * Time.deltaTime);
+    }
+
     public void IncreaseNumber(int _number)//If there is time make this function smaller
     {
         if (_number == 1)

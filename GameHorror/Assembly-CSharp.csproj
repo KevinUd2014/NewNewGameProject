@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\FlashLight.cs" />
      <Compile Include="Assets\Scripts\Interaction.cs" />
      <Compile Include="Assets\Scripts\Key.cs" />
+     <Compile Include="Assets\Scripts\Note.cs" />
      <Compile Include="Assets\Scripts\ScarePianoTrigger.cs" />
      <Compile Include="Assets\Scripts\ScreamTrigger.cs" />
      <Compile Include="Assets\Scripts\safeDoor.cs" />
