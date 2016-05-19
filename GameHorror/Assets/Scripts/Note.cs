@@ -18,15 +18,24 @@ public class Note : MonoBehaviour {
 
         noteImage.enabled = false;
         HideButton.SetActive(false);// button not available
-
     }
     
     void Update()
     {
+        if (noteImage.enabled)
+        {
+            Time.timeScale = 0;
+            playerObject.GetComponent<Character>().enabled = false;
+            playerHeadBobing.GetComponent<BobbingHead>().enabled = false;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
         if (Input.GetButtonDown("Cancel"))
         {
             noteImage.enabled = false;
             HideButton.SetActive(false);// button not available
+            Time.timeScale = 1;
 
             if (noteImage.enabled == true) {
                 GetComponent<AudioSource>().PlayOneShot(putAwaySound);
@@ -39,6 +48,7 @@ public class Note : MonoBehaviour {
         GetComponent<AudioSource>().PlayOneShot(pickingUpSound);
 
         HideButton.SetActive(true);// button available
+        Time.timeScale = 0;
 
         playerObject.GetComponent<Character>().enabled = false;
         playerHeadBobing.GetComponent<BobbingHead>().enabled = false;
@@ -52,11 +62,11 @@ public class Note : MonoBehaviour {
         GetComponent<AudioSource>().PlayOneShot(putAwaySound);
 
         HideButton.SetActive(false);// button not available
+        Time.timeScale = 1;
 
         playerObject.GetComponent<Character>().enabled = true;
         playerHeadBobing.GetComponent<BobbingHead>().enabled = true;
         
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

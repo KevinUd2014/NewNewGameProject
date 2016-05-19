@@ -54,7 +54,9 @@
      <Compile Include="Assets\Scripts\Interaction.cs" />
      <Compile Include="Assets\Scripts\Key.cs" />
      <Compile Include="Assets\Scripts\KnockOnDoor.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Note.cs" />
+     <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\ScarePianoTrigger.cs" />
      <Compile Include="Assets\Scripts\ScaryOpenDoor.cs" />
      <Compile Include="Assets\Scripts\ScreamTrigger.cs" />
