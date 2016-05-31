@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour {
 
     public GameObject pauseUI;
 
-    private bool paused = false;
+    public bool paused = false;
 
     public GameObject playerObject;
     public GameObject playerHeadBobing;
@@ -19,34 +19,15 @@ public class PauseMenu : MonoBehaviour {
     }
     void Update(){
         
-        if (Input.GetButtonDown("Cancel") && !pauseUI)
+        if (Input.GetButtonDown("CancelMouse"))// && pauseUI == true && paused == true)
         {
             ResumeGame();
         }
-        if (Input.GetButtonDown("Pause") && pauseUI)
+        if (Input.GetButtonDown("Cancel"))// && pauseUI == false && paused == false)
         {
             Pause();
         }
-
-            //if(Input.GetButtonDown("Pause"))
-            //{
-            //    paused = !paused;
-            //}
-
-            //if(paused)
-            //{
-            //    pauseUI.SetActive(true);
-            //    Time.timeScale = 0;
-            //    Pause();
-            //}
-
-            //if(!paused)
-            //{
-            //    pauseUI.SetActive(false);
-            //    Time.timeScale = 1;
-            //    ResumeGame();
-            //}
-        }
+    }
 
     public void Pause()
     {
@@ -74,10 +55,12 @@ public class PauseMenu : MonoBehaviour {
     }
     public void Restart()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void MainMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
     public void Quit()

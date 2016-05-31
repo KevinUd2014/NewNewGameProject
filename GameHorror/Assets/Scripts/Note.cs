@@ -31,11 +31,12 @@ public class Note : MonoBehaviour {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("CancelMouse") && noteImage.enabled)
         {
             noteImage.enabled = false;
             HideButton.SetActive(false);// button not available
             Time.timeScale = 1;
+            GetGoingCharacter();
 
             if (noteImage.enabled == true) {
                 GetComponent<AudioSource>().PlayOneShot(putAwaySound);
@@ -59,14 +60,19 @@ public class Note : MonoBehaviour {
     public void HideNoteImage()
     {
         noteImage.enabled = false;
-        GetComponent<AudioSource>().PlayOneShot(putAwaySound);
+        
 
         HideButton.SetActive(false);// button not available
         Time.timeScale = 1;
 
+        GetGoingCharacter();
+    }
+    private void GetGoingCharacter()
+    {
+        GetComponent<AudioSource>().PlayOneShot(putAwaySound);
         playerObject.GetComponent<Character>().enabled = true;
         playerHeadBobing.GetComponent<BobbingHead>().enabled = true;
-        
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
