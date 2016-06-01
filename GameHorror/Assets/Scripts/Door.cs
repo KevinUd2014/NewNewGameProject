@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Door : MonoBehaviour {
 
@@ -18,20 +19,40 @@ public class Door : MonoBehaviour {
 
     public AudioClip lockedDoorSound;
 
+    public Image lockedIcon;
+
     public bool isLocked = false;
 
     public bool front = false;
     public bool back = false;
+    public float interval;
 
     public void Start()
     {
         audioSource = GetComponent<AudioSource>();//gets the audiosource
+        lockedIcon.enabled = false;
     }
 
+    //function to blink the text 
+    public IEnumerator BlinkText()
+    {
+        //blinks it forever. You can set a terminating condition depending upon your requirement
+        while (true)
+        {
+            //display “I AM FLASHING TEXT” for the next 0.5 seconds
+            lockedIcon.enabled = true;
+            yield return new WaitForSeconds(1.5f);
+
+            lockedIcon.enabled = false;
+
+            yield break;
+        }
+    }
     public void ChangeDoorState()
     {
         if (isLocked != true)
         {
+            lockedIcon.enabled = false;
             openDoor = !openDoor; // will be called for changing the door state!
 
             if (audioSource != null)
@@ -42,6 +63,7 @@ public class Door : MonoBehaviour {
         else
         {
             PlayLockedDoorSound();
+            StartCoroutine(BlinkText());
         }
     }
     void PlayLockedDoorSound()
@@ -55,7 +77,6 @@ public class Door : MonoBehaviour {
         {//opens the door //advanced!
             Quaternion targetRotationOpen = Quaternion.Euler(0, doorOpenAngle, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotationOpen, smooth * Time.deltaTime);
-            
         }
         else
         {

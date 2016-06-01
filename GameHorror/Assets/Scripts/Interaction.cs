@@ -20,7 +20,7 @@ public class Interaction : MonoBehaviour {
         {
             interactIcon.enabled = false;
         }
-	}
+    }
 	// Update is called once per frame
 	void Update () {
         // transform.position = middle of camera
