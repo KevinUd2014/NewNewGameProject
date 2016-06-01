@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Door.cs" />
      <Compile Include="Assets\Scripts\DoorTriggerLeftSide.cs" />
      <Compile Include="Assets\Scripts\DoorTriggerRightSide.cs" />
+     <Compile Include="Assets\Scripts\EnemyChase.cs" />
      <Compile Include="Assets\Scripts\FlashLight.cs" />
      <Compile Include="Assets\Scripts\Interaction.cs" />
      <Compile Include="Assets\Scripts\Key.cs" />
