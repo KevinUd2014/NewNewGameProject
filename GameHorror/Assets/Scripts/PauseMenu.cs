@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
 
+    public EnemyChase enemyChase;
+
     public GameObject pauseUI;
 
     public bool paused = false;
@@ -33,13 +35,20 @@ public class PauseMenu : MonoBehaviour {
     {
         playerObject.GetComponent<Character>().enabled = false;
         playerHeadBobing.GetComponent<BobbingHead>().enabled = false;
-
+        
         pauseUI.SetActive(true);
         Time.timeScale = 0;
         paused = true;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        if (enemyChase != null)
+        {
+            enemyChase.whispers.Pause();
+        }
+
+        //enemyChase.whispers.Pause();
     }
     public void ResumeGame()
     {
@@ -52,6 +61,13 @@ public class PauseMenu : MonoBehaviour {
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        if (enemyChase != null)
+        {
+            enemyChase.whispers.UnPause();
+        }
+
+        //enemyChase.whispers.UnPause();
     }
     public void Restart()
     {
@@ -67,4 +83,9 @@ public class PauseMenu : MonoBehaviour {
     {
         Application.Quit();
     }
+    //public IEnumerator Wait()
+    //{
+    //    float fadeTime = GameObject.Find("Player").GetComponent<Fading>().BeginFade(1);
+    //    yield return new WaitForSeconds(fadeTime);
+    //}
 }

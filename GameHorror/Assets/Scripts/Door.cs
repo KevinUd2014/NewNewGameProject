@@ -33,7 +33,7 @@ public class Door : MonoBehaviour {
         lockedIcon.enabled = false;
     }
 
-    //function to blink the text 
+    //function to make text blink 
     public IEnumerator BlinkText()
     {
         //blinks it forever. You can set a terminating condition depending upon your requirement

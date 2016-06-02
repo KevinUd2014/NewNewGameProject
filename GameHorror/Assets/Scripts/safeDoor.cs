@@ -26,12 +26,18 @@ public class safeDoor : MonoBehaviour
     public float doorOpenAngle = 90f;
     public float smooth = 2f;
 
+    public Image lockedIcon;
+
+    public PauseMenu pauseMenu;
+
     // Use this for initialization
     void Start()
     {
         opened = false;
         safeUI.enabled = false;
         safeImage.enabled = false;
+        Time.timeScale = 1;
+        lockedIcon.enabled = false;
         HideButton.SetActive(false);// button not available
         //UnlockCharacter();
     }
@@ -40,6 +46,7 @@ public class safeDoor : MonoBehaviour
     {
         safeUI.enabled = true;
         ShowNoteImage();
+        Time.timeScale = 0;
         //disables the player = no movement
         LockCharacter();
 
@@ -54,30 +61,57 @@ public class safeDoor : MonoBehaviour
         safeImage.enabled = false;
         HideButton.SetActive(false);// button not available
         safeUI.enabled = false;
+        Time.timeScale = 1;
         UnlockCharacter();
     }
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("CancelMouse") && safeImage.enabled)
         {
             UnlockCharacter();
+            Time.timeScale = 1;
+            lockedIcon.enabled = false;
             safeImage.enabled = false;
             HideButton.SetActive(false);// button not available
         }
-        //checks for right combination
-        if (number01 == 1 && number02 == 2 && number03 == 4 && number04 == 10)
+        if (safeImage.enabled && !opened)// || safeUI.enabled)
         {
-            opened = true;
+            LockCharacter();
+            Time.timeScale = 0;
         }
-        if(opened == true)
+        //checks for right combination
+        
+        if (opened == true && !safeImage.enabled && !pauseMenu.paused)
         {
             UnlockCharacter();
-            safeImage.enabled = false;
+            //opened = false;
+            lockedIcon.enabled = false;
+            //safeImage.enabled = false;
+            Time.timeScale = 1;
 
             gameObject.layer = 0; // layer 0 is Default
 
             UnlockSafeDoor();
+        }
+        if (number01 == 1 && number02 == 2 && number03 == 4 && number04 == 10 && !opened)
+        {
+            opened = true;
+            //safeImage.enabled = true;
+            StartCoroutine(BlinkText());
+        }
+    }
+    public IEnumerator BlinkText()
+    {
+        //blinks it forever. You can set a terminating condition depending upon your requirement
+        while (true)
+        {
+            //display “I AM FLASHING TEXT” for the next 0.5 seconds
+            lockedIcon.enabled = true;
+            yield return new WaitForSeconds(1.5f);
+
+            lockedIcon.enabled = false;
+
+            yield break;
         }
     }
 
@@ -88,6 +122,7 @@ public class safeDoor : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        safeUI.enabled = true;
     }
 
     public void UnlockCharacter()

@@ -51,6 +51,8 @@
      <Compile Include="Assets\Scripts\DoorTriggerLeftSide.cs" />
      <Compile Include="Assets\Scripts\DoorTriggerRightSide.cs" />
      <Compile Include="Assets\Scripts\EnemyChase.cs" />
+     <Compile Include="Assets\Scripts\EnemyHealth.cs" />
+     <Compile Include="Assets\Scripts\Fading.cs" />
      <Compile Include="Assets\Scripts\FlashLight.cs" />
      <Compile Include="Assets\Scripts\Interaction.cs" />
      <Compile Include="Assets\Scripts\Key.cs" />
@@ -58,9 +60,13 @@
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Note.cs" />
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
+     <Compile Include="Assets\Scripts\PlayerEnterSafeZone.cs" />
+     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\ScarePianoTrigger.cs" />
      <Compile Include="Assets\Scripts\ScaryOpenDoor.cs" />
      <Compile Include="Assets\Scripts\ScreamTrigger.cs" />
+     <Compile Include="Assets\Scripts\TriggerEnemy.cs" />
+     <Compile Include="Assets\Scripts\TwoDoorsOpen.cs" />
      <Compile Include="Assets\Scripts\safeDoor.cs" />
      <None Include="Assets\Imported\ghoul\shader\ghoulshader.shader" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />

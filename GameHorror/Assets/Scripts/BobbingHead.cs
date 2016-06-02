@@ -15,7 +15,7 @@ public class BobbingHead : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 cSharpConversion = transform.localPosition;
+        Vector3 cSharpConversion = transform.localPosition * Time.deltaTime;
 
         if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0){
             timer = 0.0f;

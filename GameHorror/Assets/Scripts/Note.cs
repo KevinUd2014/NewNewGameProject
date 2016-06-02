@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class Note : MonoBehaviour {
 
     public Image noteImage;
-    public GameObject HideButton;
+    //public GameObject HideButton;
+    public Image hideText;
 
     public AudioClip pickingUpSound;
     public AudioClip putAwaySound;
@@ -17,7 +18,8 @@ public class Note : MonoBehaviour {
     void Start () {
 
         noteImage.enabled = false;
-        HideButton.SetActive(false);// button not available
+        hideText.enabled = false;
+        //HideButton.SetActive(false);// button not available
     }
     
     void Update()
@@ -28,13 +30,14 @@ public class Note : MonoBehaviour {
             playerObject.GetComponent<Character>().enabled = false;
             playerHeadBobing.GetComponent<BobbingHead>().enabled = false;
 
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            //Cursor.lockState = CursorLockMode.None;
+            //Cursor.visible = true;
         }
         if (Input.GetButtonDown("CancelMouse") && noteImage.enabled)
         {
             noteImage.enabled = false;
-            HideButton.SetActive(false);// button not available
+            //HideButton.SetActive(false);// button not available
+            hideText.enabled = false;
             Time.timeScale = 1;
             GetGoingCharacter();
 
@@ -47,22 +50,22 @@ public class Note : MonoBehaviour {
     {
         noteImage.enabled = true;
         GetComponent<AudioSource>().PlayOneShot(pickingUpSound);
-
-        HideButton.SetActive(true);// button available
+        //HideButton.SetActive(true);// button available
+        hideText.enabled = true;
         Time.timeScale = 0;
 
         playerObject.GetComponent<Character>().enabled = false;
         playerHeadBobing.GetComponent<BobbingHead>().enabled = false;
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
+       // Cursor.visible = true;
     }
     public void HideNoteImage()
     {
         noteImage.enabled = false;
-        
 
-        HideButton.SetActive(false);// button not available
+        //HideButton.SetActive(false);// button not available
+        hideText.enabled = false;
         Time.timeScale = 1;
 
         GetGoingCharacter();

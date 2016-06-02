@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour {
 
     public void LoadLevel(string _nameOfLevel){
 
+        Time.timeScale = 1;
         SceneManager.LoadScene(_nameOfLevel);
     }
 
@@ -13,4 +14,9 @@ public class MainMenu : MonoBehaviour {
 
         Application.Quit();
     }
+    //public IEnumerator Wait()
+    //{
+    //    float fadeTime = GameObject.Find("NoteToSelf").GetComponent<Fading>().BeginFade(1);
+    //    yield return new WaitForSeconds(fadeTime);
+    //}
 }

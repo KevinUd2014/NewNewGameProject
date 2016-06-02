@@ -3,6 +3,8 @@ using System.Collections;
 
 public class EnemyChase : MonoBehaviour {
 
+    public PauseMenu pauseMenu;
+
     private NavMeshAgent myAgent;
     public Transform target;
 
@@ -15,19 +17,46 @@ public class EnemyChase : MonoBehaviour {
 
     private float distanceFromTarget;
 
-	// Use this for initialization
-	void Start () {
+    private PlayerHealth playerHealth;
+    public int damage = 50;
+
+    private float elapsedTime = 0;
+    public float footstepsPerSecond;
+    public float footstepsPerSecondSprint;
+    public AudioSource footstep;
+    public AudioSource whispers;
+
+    // Use this for initialization
+    void Start () {
         myAgent = GetComponent<NavMeshAgent>();
         myAnimator = GetComponent<Animator>();
         myAgent.stoppingDistance = stoppingDistance;
+        whispers.Play();
+        whispers.loop = true;
         attackCoolDown = Time.time;
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         ChaseTarget();
+
+        elapsedTime += Time.deltaTime;
+
+        if (chaseTarget)
+        {
+            if (elapsedTime >= 1 / footstepsPerSecond)
+            {
+                footstep.Play();
+                elapsedTime = 0;
+            }
+        }
+        if(!chaseTarget)
+        {
+            footstep.Stop();
+        }
         //myAgent.SetDestination(target.position);
-	}
+    }
 
     void ChaseTarget()
     {
@@ -57,7 +86,8 @@ public class EnemyChase : MonoBehaviour {
     {
         if(Time.time > attackCoolDown)
         {
-            Debug.Log("Attack");
+            playerHealth.TakeDamage(damage);
+            //Debug.Log("Attack");
             myAnimator.SetTrigger("triggerAttack");
             attackCoolDown = Time.time + delayBetweenAttacks;
         }
