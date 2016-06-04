@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Door : MonoBehaviour {
+public class Door : SavableMonoBehaviour {
 
     public bool openDoor = false;//false = close true = open
 
@@ -27,10 +27,13 @@ public class Door : MonoBehaviour {
     public bool back = false;
     public float interval;
 
-    public void Start()
+    public override void Start()
     {
+        base.Start();
         audioSource = GetComponent<AudioSource>();//gets the audiosource
         lockedIcon.enabled = false;
+
+        tryLoad("open", out openDoor);
     }
 
     //function to make text blink 
@@ -54,6 +57,8 @@ public class Door : MonoBehaviour {
         {
             lockedIcon.enabled = false;
             openDoor = !openDoor; // will be called for changing the door state!
+
+            save("open", openDoor);
 
             if (audioSource != null)
             {

@@ -5,7 +5,7 @@ public class BobbingHead : MonoBehaviour {
 
     // Use this for initialization
     private float timer = 0.0f;
-    float bobbingSpeed = 0.18f;
+    float bobbingSpeed = 9.5f;
     float bobbingAmount = 0.2f;
     float midpoint = 2.0f;
 
@@ -15,14 +15,14 @@ public class BobbingHead : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 cSharpConversion = transform.localPosition * Time.deltaTime;
+        Vector3 cSharpConversion = transform.localPosition;
 
         if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0){
             timer = 0.0f;
         }
         else{
             waveslice = Mathf.Sin(timer);
-            timer = timer + bobbingSpeed;
+            timer = timer + bobbingSpeed * Time.deltaTime;
             if (timer > Mathf.PI * 2)
             {
                 timer = timer - (Mathf.PI * 2);

@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent (typeof(CharacterController))]// make it so that we need a Character controller in our game in order for it to run!
-public class Character : MonoBehaviour {
+public class Character : SavableMonoBehaviour {
 
     public float movementSpeed = 5.00f;
     public float mouseSensitivity = 5.00f;
@@ -24,11 +24,16 @@ public class Character : MonoBehaviour {
     public float footstepsPerSecondSprint;
 
     // Use this for initialization  
-    void Start()
+    public override void Start()
     {
+        base.Start();
         Cursor.lockState = CursorLockMode.Locked;//This hiddes the mouse pointer
         //footstep = GetComponent<AudioSource>();
         cC = GetComponent<CharacterController>(); //create a new CharacterController
+
+        float x, y, z;
+        if (tryLoad("x", out x) && tryLoad("y", out y) && tryLoad("z", out z))
+            transform.position = new Vector3(x, y, z);
     }
 
     // Update is called once per frame
@@ -82,5 +87,12 @@ public class Character : MonoBehaviour {
 
         cC.Move(speed * Time.deltaTime);
        
+    }
+
+    public void Save()
+    {
+        save("x", transform.position.x);
+        save("y", transform.position.y);
+        save("z", transform.position.z);
     }
 }

@@ -1,29 +1,43 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class Key : MonoBehaviour {
+public class Key : SavableMonoBehaviour {
 
     public Door myDoor;
     public AudioClip pickUpKeySound;
     public AudioSource audioSource;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
+        bool taken = false;
+
+        if (tryLoad("taken", out taken) && taken)
+        {
+            unlockDoor();
+        }
+        
         audioSource = GetComponent<AudioSource>();
     }
 
 	public void UnlockDoor()
     {
-        myDoor.isLocked = false;
         audioSource.PlayOneShot(pickUpKeySound);
 
+        save("taken", true);
         StartCoroutine("WaitForSelfDestruct");//works as a function
-        //Destroy(gameObject);
     }
 
     IEnumerator WaitForSelfDestruct()//makes a countdown awailable
     {
         yield return new WaitForSeconds(pickUpKeySound.length);//will not destroy before the sound is finished.
+        unlockDoor();
+    }
+
+    private void unlockDoor()
+    {
+        myDoor.isLocked = false;
         Destroy(gameObject);
     }
 }

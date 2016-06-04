@@ -62,12 +62,16 @@
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\PlayerEnterSafeZone.cs" />
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />
+     <Compile Include="Assets\Scripts\SavableMonoBehaviour.cs" />
      <Compile Include="Assets\Scripts\ScarePianoTrigger.cs" />
      <Compile Include="Assets\Scripts\ScaryOpenDoor.cs" />
      <Compile Include="Assets\Scripts\ScreamTrigger.cs" />
+     <Compile Include="Assets\Scripts\TBFFile.cs" />
      <Compile Include="Assets\Scripts\TriggerEnemy.cs" />
+     <Compile Include="Assets\Scripts\TriggerEnterNewLevel.cs" />
      <Compile Include="Assets\Scripts\TwoDoorsOpen.cs" />
      <Compile Include="Assets\Scripts\safeDoor.cs" />
+     <Compile Include="Assets\Startup.cs" />
      <None Include="Assets\Imported\ghoul\shader\ghoulshader.shader" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
      <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />

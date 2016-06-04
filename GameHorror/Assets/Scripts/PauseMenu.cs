@@ -79,6 +79,12 @@ public class PauseMenu : MonoBehaviour {
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
+    public void Save()
+    {
+        playerObject.GetComponent<Character>().Save();
+        SavableMonoBehaviour.RootSave("Level", SceneManager.GetActiveScene().name);
+        SavableMonoBehaviour.Save();
+    }
     public void Quit()
     {
         Application.Quit();

@@ -1,0 +1,37 @@
+!ROOT
+Level s"StartLevel1Real"
+!StartLevel1Real Key (2)
+taken bTrue
+!StartLevel1Real Key (5)
+taken bTrue
+!StartLevel1Real Key (3)
+!StartLevel1Real Key (4)
+!StartLevel1Real Key (6)
+taken bTrue
+!StartLevel1Real Key
+taken bTrue
+!StartLevel1Real Key (7)
+taken bTrue
+!StartLevel1Real Key (1)
+taken bTrue
+!StartLevel1Real Door5
+open bTrue
+!StartLevel1Real Door3
+open bTrue
+!StartLevel1Real Door8
+open bTrue
+!StartLevel1Real Door7
+!StartLevel1Real Door12
+!StartLevel1Real Door1
+!StartLevel1Real Door9
+!StartLevel1Real Door10
+!StartLevel1Real Door2
+!StartLevel1Real Door6
+open bTrue
+!StartLevel1Real Player
+x f-15.69064
+y f0.07999921
+z f-8.402617
+!StartLevel1Real Door11
+!StartLevel1Real Door4
+open bTrue
